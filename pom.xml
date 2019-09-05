@@ -25,6 +25,22 @@
             <id>local</id>
               <build>
                   <plugins>
+                      <!--clean webapp folder -->
+                      <plugin>
+                          <artifactId>maven-clean-plugin</artifactId>
+                          <version>2.4.1</version>
+                          <configuration>
+                              <filesets>
+                                  <fileset>
+                                      <directory>src/main/webapp</directory>
+                                      <includes>
+                                          <include>**/*</include>
+                                      </includes>
+                                      <followSymlinks>false</followSymlinks>
+                                  </fileset>
+                              </filesets>
+                          </configuration>
+                      </plugin>
                   <!-- NPM build -->
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
