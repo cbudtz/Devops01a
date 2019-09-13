@@ -35,10 +35,10 @@ const About = withRouter(({history, match})=>{
   console.log(history);
   console.log(match);
   return <div><h1>About {match.params.text}</h1>
-    <button onClick={()=>history.push("/")}>Go back!</button>
+    <button onClick={()=>history.push("/")}>Go to front</button>
   </div>
 })
 
-const Default = ()=><h2>noMatch</h2>;
+const Default = ()=><h2>noMatch - 404</h2>;
 
 export default App;
