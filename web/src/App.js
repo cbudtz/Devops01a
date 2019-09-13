@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {Link, Route, withRouter} from "react-router-dom";
+import {Link, Route, Switch, withRouter} from "react-router-dom";
 
 function App() {
 
@@ -22,8 +22,10 @@ function App() {
           Learn React
         </a>
         <Link to={"/about/giraffes"}>Look at About!</Link>
-        <Route path={"/about/:text"} component={About}/>
-        <Route component={Default}></Route>
+        <Switch>
+          <Route path={"/about/:text"} component={About}/>
+          <Route component={Default}></Route>
+        </Switch>
       </header>
     </div>
   );
