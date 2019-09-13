@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {Link, Route} from "react-router-dom";
+import {Link, Route, withRouter} from "react-router-dom";
 
 function App() {
 
@@ -29,10 +29,13 @@ function App() {
   );
 }
 
-const About = ({match})=>{
+const About = withRouter(({history, match})=>{
+  console.log(history);
   console.log(match);
-  return <h1>About {match.params.text}</h1>
-}
+  return <div><h1>About {match.params.text}</h1>
+    <button onClick={()=>history.push("/")}>Go back!</button>
+  </div>
+})
 
 const Default = ()=><h2>noMatch</h2>;
 
