@@ -1,8 +1,10 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import {Link, Route} from "react-router-dom";
 
 function App() {
+
   return (
     <div className="App">
       <header className="App-header">
@@ -19,9 +21,19 @@ function App() {
         >
           Learn React
         </a>
+        <Link to={"/about/giraffes"}>Look at About!</Link>
+        <Route path={"/about/:text"} component={About}/>
+        <Route component={Default}></Route>
       </header>
     </div>
   );
 }
+
+const About = ({match})=>{
+  console.log(match);
+  return <h1>About {match.params.text}</h1>
+}
+
+const Default = ()=><h2>noMatch</h2>;
 
 export default App;
