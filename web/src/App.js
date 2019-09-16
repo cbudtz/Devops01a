@@ -4,10 +4,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import {Link, Route, Switch, withRouter} from "react-router-dom";
 import Button from "react-bootstrap/Button";
-import GiraffeStore from "./stores/GiraffeStore";
+import {giraffeStore} from "./stores/GiraffeStore";
 import {observer} from "mobx-react";
 
-const giraffeStore = new GiraffeStore();
 function App() {
 
   return (
