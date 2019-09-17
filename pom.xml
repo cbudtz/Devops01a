@@ -19,7 +19,7 @@
           <profile>
             <activation>
                 <property>
-                    <name>env.LOCALBUILD</name>
+                    <name>!env.HEROKUBUILD</name>
                 </property>
             </activation>
             <id>local</id>

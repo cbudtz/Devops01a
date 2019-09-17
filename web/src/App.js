@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 import {giraffeStore} from "./stores/GiraffeStore";
 import {observer} from "mobx-react";
 
+
 function App() {
 
   return (
@@ -27,20 +28,22 @@ function App() {
         <Link to={"/about/giraffes"}>Look at About!</Link>
         <Switch>
           <Route path={"/about/:text"} component={About}/>
-          <Route component={Default}/>
+          <Route exact path={"/"} render={()=><h1>Startside</h1>}/>
+          <Route render={()=><h2>noMatch - 404</h2>}/>
         </Switch>
-        <ul>
+          <ul>
           {giraffeStore.giraffes.map((giraffeName,key)=>
               <li key={key}>{giraffeName}</li>
           )}
           </ul>
         <Button onClick={()=>giraffeStore.giraffes.push("Elmer")}>Tilføj giraf</Button>
+        <Button onClick={()=>giraffeStore.giraffes.pop()}>Fjern giraf</Button>
       </header>
     </div>
   );
 }
 
-const About = withRouter(({history, match})=>{
+const About = withRouter(({history,match})=>{
   console.log(history);
   console.log(match);
   return <div><h1>About {match.params.text}</h1>
@@ -48,6 +51,5 @@ const About = withRouter(({history, match})=>{
   </div>
 });
 
-const Default = ()=><h2>noMatch - 404</h2>;
 
 export default observer(App);
