@@ -6,6 +6,9 @@
 trigger:
 - master
 
+variables:
+  HEROKUBUILD: 'true'
+
 pool:
   vmImage: 'ubuntu-latest'
 
