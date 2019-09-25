@@ -23,3 +23,6 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
+- task: CmdLine@2
+  inputs:
+    script: 'java -jar target/Heroku01.jar'
