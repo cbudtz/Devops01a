@@ -1,7 +1,9 @@
 import {autorun, decorate, observable} from "mobx";
 const baseUrl = process.env.NODE_ENV === 'development' ?  "http://localhost:8080/":""; //Check if dev
 
+const states = {LOADING:"LOAD", DONE:"DONE", FAILED:"FAILED"}
 class GiraffeStore {
+    state = states.DONE;
     giraffes = ["Loading giraffes"];
 
     constructor(props) {
@@ -9,11 +11,14 @@ class GiraffeStore {
     }
 
     fetchGiraffes (){
+        this.loading = states.LOADING;
         fetch(baseUrl + "rest/giraffes").then(
             (response)=> response.json().then(
-                (json)=> this.giraffes=json
+                (json)=> {
+                    this.giraffes=json;
+                    this.state=states.DONE;}
             )
-        )
+        ).catch(()=>this.state = states.FAILED )
     }
 
 
