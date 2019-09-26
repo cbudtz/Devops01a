@@ -5,6 +5,6 @@ matrix:
 
 
     - language: node_js
-      before_install: cd project
+      before_install: cd web
       node_js:
         - 7
