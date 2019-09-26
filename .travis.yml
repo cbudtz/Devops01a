@@ -1,7 +1,7 @@
 matrix:
   include:
     - language: java
-      jdk: oraclejd11
+      jdk: oraclejdk11
 
 
     - language: node_js
