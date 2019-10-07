@@ -24,24 +24,24 @@ import java.util.Set;
 @Consumes(MediaType.APPLICATION_JSON)
 public class MongoService {
     @POST
-    @Path("{collection}")
-    public void postRandomObjects(@PathParam("collection") String collection, User mongoDoc){
-        System.out.println("Pathname: "+ collection + ", object: " + mongoDoc);
+    public void postTypedObject(User mongoDoc){
+        System.out.println("object: " + mongoDoc);
         MorphiaHandler.getInstance().save(mongoDoc);
     }
 
     @GET
-    @Path("{collection}")
-    public List<User> getRandomDocuments(@PathParam("collection") String collection) {
+    public List<User> getTypedObject() {
         Query<User> query = MorphiaHandler.getInstance().createQuery(User.class);
         return query.asList();
     }
 
     @DELETE
-    @Path("{collection}")
-    public void deleteRandomDocuments(@PathParam("collection") String collection, Document doc) {
-        ObjectId objectId=  doc.getObjectId("_id");
-        System.out.println(objectId.toHexString());
+    @Path("{id}")
+    public void deleteTyped(@PathParam("id") String id) {
+        System.out.println(id);
+        Query<User> userQ = MorphiaHandler.getInstance().createQuery(User.class);
+        userQ.criteria("_id").equal(new ObjectId(id));
+        MorphiaHandler.getInstance().findAndDelete(userQ);
     }
 
 

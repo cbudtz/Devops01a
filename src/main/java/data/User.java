@@ -7,14 +7,17 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
+import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Entity
 public class User {
-    @Id @JsonIgnore
+    @Id @JsonIgnore @javax.persistence.Id
     private ObjectId _id;
+
     private String username;
 
     public String getId(){
