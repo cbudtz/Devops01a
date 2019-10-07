@@ -28,7 +28,7 @@ function App() {
         <Link to={"/about/giraffes"}>Look at About!</Link>
         <Switch>
           <Route path={"/about/:text"} component={About}/>
-          <Route exact path={"/"} render={()=><h1>Startside</h1>}/>
+          <Route exact path={"/"} render={()=><h1>Welcome</h1>}/>
           <Route render={()=><h2>noMatch - 404</h2>}/>
         </Switch>
           <ul>

@@ -10,92 +10,92 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.9</maven.compiler.source>
+        <maven.compiler.target>1.9</maven.compiler.target>
         <tomcat.version>9.0.21</tomcat.version>
     </properties>
 
     <profiles>
-          <profile>
+        <profile>
             <activation>
                 <property>
                     <name>!env.HEROKUBUILD</name>
                 </property>
             </activation>
             <id>local</id>
-              <build>
-                  <plugins>
-                      <!--clean webapp folder -->
-                      <plugin>
-                          <artifactId>maven-clean-plugin</artifactId>
-                          <version>2.4.1</version>
-                          <configuration>
-                              <filesets>
-                                  <fileset>
-                                      <directory>src/main/webapp</directory>
-                                      <includes>
-                                          <include>**/*</include>
-                                      </includes>
-                                      <followSymlinks>false</followSymlinks>
-                                  </fileset>
-                              </filesets>
-                          </configuration>
-                      </plugin>
-                  <!-- NPM build -->
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>exec-maven-plugin</artifactId>
-                    <version>1.6.0</version>
-                    <executions>
-                        <execution>
-                            <id>npm-build</id>
-                            <phase>validate</phase>
-                            <goals>
-                                <goal>exec</goal>
-                            </goals>
-                            <configuration>
-                                <workingDirectory>web</workingDirectory>
-                                <executable>npm</executable>
-                                <arguments>
-                                    <argument>run</argument>
-                                    <argument>build</argument>
-                                </arguments>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
-                <!-- Copy NPM build to java webapp folder -->
-                <plugin>
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <version>2.6</version>
-                    <executions>
-                        <execution>
-                            <id>npm-build-copy</id>
-                            <phase>validate</phase>
-                            <goals>
-                                <goal>copy-resources</goal>
-                            </goals>
-                            <configuration>
-                                <outputDirectory>${basedir}/src/main/webapp</outputDirectory>
-                                <resources>
-                                    <resource>
-                                        <directory>${basedir}/web/build</directory>
-                                        <filtering>true</filtering>
-                                    </resource>
-                                </resources>
-                            </configuration>
+            <build>
+                <plugins>
+                    <!--clean webapp folder -->
+                    <plugin>
+                        <artifactId>maven-clean-plugin</artifactId>
+                        <version>2.4.1</version>
+                        <configuration>
+                            <filesets>
+                                <fileset>
+                                    <directory>src/main/webapp</directory>
+                                    <includes>
+                                        <include>**/*</include>
+                                    </includes>
+                                    <followSymlinks>false</followSymlinks>
+                                </fileset>
+                            </filesets>
+                        </configuration>
+                    </plugin>
+                    <!-- NPM build -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.6.0</version>
+                        <executions>
+                            <execution>
+                                <id>npm-build</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <workingDirectory>web</workingDirectory>
+                                    <executable>npm</executable>
+                                    <arguments>
+                                        <argument>run</argument>
+                                        <argument>build</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!-- Copy NPM build to java webapp folder -->
+                    <plugin>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <version>2.6</version>
+                        <executions>
+                            <execution>
+                                <id>npm-build-copy</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${basedir}/src/main/webapp</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${basedir}/web/build</directory>
+                                            <filtering>true</filtering>
+                                        </resource>
+                                    </resources>
+                                </configuration>
 
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <nonFilteredFileExtensions>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <nonFilteredFileExtensions>
 
-                            <nonFilteredFileExtension>woff</nonFilteredFileExtension>
-                            <nonFilteredFileExtension>woff2</nonFilteredFileExtension>
-                            <nonFilteredFileExtension>ttf</nonFilteredFileExtension>
-                        </nonFilteredFileExtensions>
-                    </configuration>
-                </plugin>
+                                <nonFilteredFileExtension>woff</nonFilteredFileExtension>
+                                <nonFilteredFileExtension>woff2</nonFilteredFileExtension>
+                                <nonFilteredFileExtension>ttf</nonFilteredFileExtension>
+                            </nonFilteredFileExtensions>
+                        </configuration>
+                    </plugin>
                 </plugins>
             </build>
         </profile>
@@ -170,14 +170,41 @@
             <version>5.5.2</version>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
+        <!-- Object generator-->
         <dependency>
-            <groupId>org.mongodb</groupId>
-            <artifactId>mongo-java-driver</artifactId>
-            <version>3.11.0</version>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.10</version>
+        </dependency>
+        <!-- MongoMapper -->
+            <dependency>
+                <groupId>dev.morphia.morphia</groupId>
+                <artifactId>core</artifactId>
+                <version>1.5.4</version>
+            </dependency>
+        <!-- Database connector -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.39</version>
         </dependency>
 
-
+        <!-- Hibernate -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.2.1.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-c3p0</artifactId>
+            <version>5.2.1.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.2.1.Final</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -216,6 +243,14 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>9</source>
+                    <target>9</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>
