@@ -3,7 +3,6 @@ matrix:
     - language: java
       jdk: oraclejdk11
 
-
     - language: node_js
       before_install: cd web
       node_js:
