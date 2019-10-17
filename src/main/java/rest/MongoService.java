@@ -1,5 +1,8 @@
 package rest;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.deser.std.StringDeserializer;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import data.MongoConnector;
@@ -31,6 +34,8 @@ public class MongoService {
 
     @GET
     public List<User> getTypedObject() {
+        ObjectMapper mapper = new ObjectMapper();
+        SimpleModule module = new SimpleModule();
         Query<User> query = MorphiaHandler.getInstance().createQuery(User.class);
         return query.asList();
     }
