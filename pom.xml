@@ -201,6 +201,13 @@
             <artifactId>unirest-java</artifactId>
             <version>3.1.02</version>
         </dependency>
+        <!-- JSON webTokens -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.7.0</version>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>

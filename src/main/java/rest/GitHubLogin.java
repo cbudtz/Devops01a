@@ -1,22 +1,23 @@
 package rest;
 
+import data.User;
 import kong.unirest.Unirest;
+import org.bson.types.ObjectId;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import java.util.HashMap;
 import java.util.Map;
 
 @Path("github")
+@Produces(MediaType.APPLICATION_JSON)
 public class GitHubLogin {
     private static String githubID = System.getenv("GITHUB_CLIENT_ID");
     private static String githubSecret = System.getenv("GITHUB_CLIENT_SECRET");
 
-    @GET
-    @Path("login")
+    @GET @Path("login")
     public Response login(){
         String URI = "https://github.com/login/oauth/authorize?client_id=" + githubID;
         System.out.println(URI);
@@ -38,7 +39,14 @@ public class GitHubLogin {
             String value = split.length==1 ? "":split[1];
             values.put(split[0],value);
         }
-        return values.get("access_token");
+        String access_token = values.get("access_token");
+        return new JWTHandler().generateJwtToken(new User(new ObjectId(),"melman","access_token"));
     }
 
+    @GET @Path("testtoken")
+    public User testToken(@HeaderParam("Authorization") String authentication){
+        System.out.println(authentication);
+        User validate = JWTHandler.validate(authentication);
+        return validate;
+    }
 }

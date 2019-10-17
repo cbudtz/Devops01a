@@ -19,6 +19,7 @@ public class User {
     private ObjectId _id;
 
     private String username;
+    private String gitHubToken;
 
     public String getId(){
         return _id.toHexString();
