@@ -12,6 +12,6 @@ class GiraffeServiceTest {
     @Test
     void getGiraffes() {
         List<String> strings = Arrays.asList("Melman", "Elmer");
-        Assertions.assertEquals(strings, g.getGiraffes());
+        Assertions.assertEquals(strings, g.getGiraffes("testHeader"));
     }
 }

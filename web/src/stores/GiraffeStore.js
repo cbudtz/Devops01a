@@ -1,5 +1,9 @@
-import {autorun, decorate, observable} from "mobx";
+import {decorate, observable} from "mobx";
+import {tokenStore} from "./TokenStore";
+
+
 const baseUrl = process.env.NODE_ENV === 'development' ?  "http://localhost:8080/":""; //Check if dev
+
 
 const states = {LOADING:"LOAD", DONE:"DONE", FAILED:"FAILED"}
 class GiraffeStore {
@@ -11,8 +15,13 @@ class GiraffeStore {
     }
 
     fetchGiraffes (){
+        const token = tokenStore.token;
         this.loading = states.LOADING;
-        fetch(baseUrl + "rest/giraffes").then(
+        fetch(baseUrl + "rest/giraffes", {
+            headers: {
+                Authorization: token
+            }
+        }).then(
             (response)=> response.json().then(
                 (json)=> {
                     this.giraffes=json;
