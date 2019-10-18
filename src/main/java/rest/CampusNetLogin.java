@@ -1,5 +1,6 @@
 package rest;
 
+import data.User;
 import kong.unirest.Unirest;
 
 import javax.ws.rs.GET;
@@ -19,13 +20,18 @@ public class CampusNetLogin {
     }
 
     @GET @Path("redirect")
-    public String redirect(@QueryParam("ticket") String cnTicket){
+    public Response redirect(@QueryParam("ticket") String cnTicket){
         System.out.println(cnTicket);
         String body =
                 Unirest.get("https://auth.dtu.dk/dtu/validate?service=http://localhost:8080/rest/campusnet/redirect&ticket="
                         + cnTicket)
                         .asString()
                         .getBody();
-        return body;
+        if ("yes".equals(body.split("\n")[0])){
+            String userID = body.split("\n")[1];
+            String token = JWTHandler.generateJwtToken(new User(userID, ""));
+            return Response.seeOther(UriBuilder.fromUri("http://localhost:3000/?token="+ token).build()).build();
+        }
+        return login();
     }
 }

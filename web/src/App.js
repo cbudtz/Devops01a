@@ -5,7 +5,10 @@ import './App.css';
 import {Link, Route, Switch, withRouter} from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import {giraffeStore} from "./stores/GiraffeStore";
+import {tokenStore} from "./stores/TokenStore";
+
 import {observer} from "mobx-react";
+import {Form, InputGroup} from "react-bootstrap";
 
 
 function App() {
@@ -32,12 +35,29 @@ function App() {
           <Route render={()=><h2>noMatch - 404</h2>}/>
         </Switch>
           <ul>
-          {giraffeStore.giraffes.map((giraffeName,key)=>
-              <li key={key}>{giraffeName}</li>
+          {giraffeStore.giraffes.map((giraffe,key)=>
+              <li key={key}>{giraffe.name}</li>
           )}
           </ul>
         <Button onClick={()=>giraffeStore.giraffes.push("Elmer")}>Tilføj giraf</Button>
         <Button onClick={()=>giraffeStore.giraffes.pop()}>Fjern giraf</Button>
+
+        <h2>Loginstatus = {tokenStore.state}</h2>
+        <Form>
+          <Form.Group>
+            <Form.Control type="text"
+                          value={tokenStore.logindata.username}
+                          onChange={(e)=>tokenStore.logindata.username=e.target.value}
+                          placeholder="Enter username"
+            />
+            <Form.Control type="text"
+                          value={tokenStore.logindata.password}
+                          placeholder="Enter password"
+                          onChange={(e)=>tokenStore.logindata.password=e.target.value}
+            />
+          </Form.Group>
+          <Button onClick={()=>tokenStore.doLogin()}>Login</Button>
+        </Form>
       </header>
     </div>
   );

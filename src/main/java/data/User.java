@@ -15,17 +15,17 @@ import javax.persistence.*;
 @Builder
 @Entity
 public class User {
-    @Id @JsonIgnore @javax.persistence.Id
-    private ObjectId _id;
+//    @Id @JsonIgnore @javax.persistence.Id
+//    private ObjectId _id;
 
     private String username;
     private String gitHubToken;
 
-    public String getId(){
-        return _id.toHexString();
-    }
-    public void setID(String id){
-        _id = new ObjectId(id);
-    }
+//    public String getId(){
+//        return _id.toHexString();
+//    }
+//    public void setID(String id){
+//        _id = new ObjectId(id);
+//    }
 
 }

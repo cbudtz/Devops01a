@@ -19,7 +19,7 @@ public class Main {
         tomcat.setPort(Integer.parseInt(port));
         tomcat.getConnector();
 
-        Context context = tomcat.addWebapp("/", new File("src/main/webapp").getAbsolutePath());
+        Context context = tomcat.addWebapp("", new File("src/main/webapp").getAbsolutePath());
 // ---For Servlets
 //        File additionWebInfClasses = new File("target/classes");
 //        WebResourceRoot resources = new StandardRoot(context);

@@ -40,7 +40,7 @@ public class GitHubLogin {
             values.put(split[0],value);
         }
         String access_token = values.get("access_token");
-        return new JWTHandler().generateJwtToken(new User(new ObjectId(),"melman","access_token"));
+        return JWTHandler.generateJwtToken(new User("melman","access_token"));
     }
 
     @GET @Path("testtoken")
