@@ -1,17 +1,19 @@
 import {decorate, observable} from "mobx";
 const baseUrl = process.env.NODE_ENV === 'development' ?  "http://localhost:8080/":""; //Check if dev
 
-const Loginstates = {LOGGINGIN:"Loading", LOGGEDOUT:"Logout", LOGGEDIN:"LoggedIn"};
+const Loginstates = {LOGGING_IN:"Loading", LOGGEDOUT:"Logout", LOGGED_IN:"LoggedIn"};
 class TokenStore {
     state = Loginstates.LOGGEDOUT;
     token = null;
     logindata = {username:"",password:""};
 
     constructor() {
+        this.token = localStorage.getItem("girafToken")
+        //Validate if token is still good and keep/discard token and set state
     }
 
     doLogin() {
-        this.state=Loginstates.LOGGINGIN;
+        this.state=Loginstates.LOGGING_IN;
         fetch(baseUrl + "rest/login",{
             method:"POST",
             body:JSON.stringify(this.logindata),
@@ -20,13 +22,12 @@ class TokenStore {
             }
         }).then(
             (response)=> {
-                debugger;
                 response.text().then(
                 (token)=> {
                     console.log("Got Token: " + token)
                     this.token=token;
-                    debugger;
-                    this.state=Loginstates.LOGGEDIN;}
+                    localStorage.setItem("girafToken",token);
+                    this.state=Loginstates.LOGGED_IN;}
 
             )}
         ).catch(()=>this.state = Loginstates.LOGGEDOUT )
