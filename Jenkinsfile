@@ -14,4 +14,7 @@ pipeline {
     }
 
   }
+  environment {
+    HEROKUBUILD = 'true'
+  }
 }
