@@ -13,6 +13,12 @@ pipeline {
       }
     }
 
+    stage('Deploy') {
+      steps {
+        sh 'java -jar target/Heroku01.jar'
+      }
+    }
+
   }
   environment {
     HEROKUBUILD = 'true'
