@@ -3,11 +3,13 @@ package rest;
 import javax.annotation.Priority;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 import java.io.IOException;
 
-@Provider
-@Priority(1000) //For at CORS filter bliver kørt først
+import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
+
+@Provider @Priority(1000) //For at CORS filter bliver kørt først
 public class AuthFilter implements ContainerRequestFilter {
 
     @Override
@@ -17,5 +19,6 @@ public class AuthFilter implements ContainerRequestFilter {
             System.out.println(containerRequestContext.getHeaderString("Authorization"));
             //Authorize the request!
         }
+      //  containerRequestContext.abortWith(Response.status(UNAUTHORIZED).build());
     }
 }
