@@ -10,14 +10,6 @@ it('renders without crashing', () => {
   ReactDOM.unmountComponentAtNode(div);
 });
 
-test('Calculates', ()=>{
-  const div = document.createElement('div');
-  const {getByText} = render(<HashRouter><App/></HashRouter>, div);
-  console.log(getByText(/Startside/));
-
-
-})
-
 
 test('Calculates correctly',()=>{
   expect(2+2).toBe(4);

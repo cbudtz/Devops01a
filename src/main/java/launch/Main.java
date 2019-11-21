@@ -15,7 +15,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        HTTPServer prometheusServer = new HTTPServer(19998);
+        //HTTPServer prometheusServer = new HTTPServer(19998);
         Tomcat tomcat = new Tomcat();
         tomcat.setBaseDir("temp");
         String port = System.getenv("PORT"); //Til Heroku
