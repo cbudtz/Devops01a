@@ -57,6 +57,7 @@ function App() {
             />
           </Form.Group>
           <Button onClick={()=>tokenStore.doLogin()}>Login</Button>
+          <Button onClick={()=>{window.deferredPrompt.prompt();}}>Installér som Native App</Button>
         </Form>
       </header>
     </div>
